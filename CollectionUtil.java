@@ -1,7 +1,11 @@
 import java.util.*;
 
 interface Mapper<E,K> {
-	K mapperCallback(E number);
+	K mapperCallback(E element);
+}
+
+interface Filter<E> {
+	boolean filterCallback(E element);
 }
 
 public class CollectionUtil {
@@ -12,5 +16,13 @@ public class CollectionUtil {
 		}
 		return mapped;
 	}
-	
+
+	public static<E> List<E> filter(List<E> list, Filter<E> listFilter) {
+		List<E> filtered = new ArrayList<E>();
+		for(E number : list){
+			if((boolean)listFilter.filterCallback(number)) filtered.add(number);
+		}
+		return filtered;
+	}
+
 }

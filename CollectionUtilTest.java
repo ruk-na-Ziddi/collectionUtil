@@ -14,6 +14,12 @@ class AddABCMapper implements Mapper<String,String> {
 	}
 }
 
+class EvenFilter implements Filter<Integer> {
+	public boolean filterCallback(Integer number){
+		return number%2==0;
+	}
+}
+
 public class CollectionUtilTest{
 	@Test
 	public void map_returns_an_Integer_List_of_each_element_increment_by_2(){
@@ -39,5 +45,18 @@ public class CollectionUtilTest{
 		assertEquals("abcABC",(String)mapped.get(0));
 		assertEquals("defABC",(String)mapped.get(1));
 		assertEquals("ghiABC",(String)mapped.get(2));
+	}
+
+	@Test
+	public void filter_returns_an_Integer_List_of_even_elements(){
+		Filter<Integer> listFilter = new EvenFilter();
+		List<Integer> numbers = new ArrayList<Integer>();
+		numbers.add(1);
+		numbers.add(2);
+		numbers.add(3);
+		numbers.add(4);
+		List<Integer> filtered = CollectionUtil.<Integer>filter(numbers,listFilter);
+		assertEquals(2,(int)filtered.get(0));
+		assertEquals(4,(int)filtered.get(1));
 	}
 }
