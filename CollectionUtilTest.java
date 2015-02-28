@@ -3,8 +3,14 @@ import org.junit.Test;
 import java.util.*;
 
 class AddTwoMapper implements Mapper<Integer,Integer> {
-	public Integer mapperCallback(Integer ele){
-		return ele+2;
+	public Integer mapperCallback(Integer number){
+		return number+2;
+	}
+}
+
+class AddABCMapper implements Mapper<String,String> {
+	public String mapperCallback(String string){
+		return string+"ABC";
 	}
 }
 
@@ -20,5 +26,18 @@ public class CollectionUtilTest{
 		assertEquals(3,(int)mapped.get(0));
 		assertEquals(4,(int)mapped.get(1));
 		assertEquals(5,(int)mapped.get(2));
+	}
+
+	@Test
+	public void map_returns_an_Integer_List_of_each_element_added_ABC_to_it(){
+		Mapper<String,String> listMapper = new AddABCMapper();
+		List<String> strings = new ArrayList<String>();
+		strings.add("abc");
+		strings.add("def");
+		strings.add("ghi");
+		List<String> mapped = CollectionUtil.<String,String>map(strings,listMapper);
+		assertEquals("abcABC",(String)mapped.get(0));
+		assertEquals("defABC",(String)mapped.get(1));
+		assertEquals("ghiABC",(String)mapped.get(2));
 	}
 }
