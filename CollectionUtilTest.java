@@ -10,10 +10,9 @@ class AddTwoMapper implements Mapper<Integer,Integer> {
 
 public class CollectionUtilTest{
 	@Test
-	public void map_returns_an_Integer_List_after_Sqauring_on_the_given_list(){
+	public void map_returns_an_Integer_List_of_each_element_increment_by_2(){
 		Mapper<Integer,Integer> listMapper = new AddTwoMapper();
 		List<Integer> numbers = new ArrayList<Integer>();
-		List<Integer> expected = new ArrayList<Integer>();
 		numbers.add(1);
 		numbers.add(2);
 		numbers.add(3);
