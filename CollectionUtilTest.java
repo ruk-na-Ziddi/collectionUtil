@@ -26,6 +26,11 @@ class AddAllReducer implements Reducer<Integer,Integer>{
 	}
 }
 
+class AddAllCharsReducer implements Reducer<Character,String>{
+	public String reduceCallback(String pv,Character cv){
+		return pv+(""+cv);
+	}
+}
 
 public class CollectionUtilTest{
 	@Test
@@ -79,5 +84,17 @@ public class CollectionUtilTest{
 		numbers.add(5);
 		Integer sumOfAllEle=CollectionUtil.<Integer,Integer>reduce(numbers,listReducer,initialValue);
 		assertEquals(15,(int)sumOfAllEle);
+	}
+
+	@Test
+	public void reduce_gives_string_by_adding_all_characters_of_list(){
+		Reducer<Character,String>listReducer=new AddAllCharsReducer();
+		List<Character> characters=new ArrayList<Character>();
+		String initialValue="";
+		characters.add('a');
+		characters.add('b');
+		characters.add('c');
+		String stringOfAllEle=CollectionUtil.<Character,String>reduce(characters,listReducer,initialValue);
+		assertEquals("abc",(String)stringOfAllEle);
 	}
 }
