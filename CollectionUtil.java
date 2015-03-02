@@ -30,10 +30,12 @@ public class CollectionUtil{
 	}
 
 	public static<E,K> K reduce(List<E> list, Reducer<E,K> listReducer,K initialValue){
+		K returnValue=null;
 		for(E element : list) {
 			initialValue=listReducer.reduceCallback(initialValue,element);
 		}
-		return initialValue;
+		returnValue=initialValue;
+		return returnValue;
 	}
 
 }
